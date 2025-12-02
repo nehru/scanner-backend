@@ -21,6 +21,64 @@ This repository contains the main backend logic, database handling, and scanning
 - Lightweight and easy to deploy
 
 ---
+                           +----------------------+
+                           |      Client / UI     |
+                           |  (Optional Frontend) |
+                           +----------+-----------+
+                                      |
+                                      v
+                           +----------------------+
+                           |     main.py          |
+                           |  (Application Entry) |
+                           +----------+-----------+
+                                      |
+             +------------------------+------------------------+
+             |                        |                        |
+             v                        v                        v
+    +----------------+       +----------------+       +----------------+
+    | Config Loader  |       | Scanner Engine |       | Database Layer |
+    |  config.yaml   |       |  (Java, etc.)  |       | (Scan Results) |
+    +----------------+       +----------------+       +----------------+
+             |                        |                        |
+             v                        v                        v
+     +---------------+       +----------------+       +----------------+
+     | Custom Rules  |       | Code Parsing   |       | DB Connection  |
+     | (YAML / Python)|       | & Analysis    |       | & Storage      |
+     +---------------+       +----------------+       +----------------+
+             |                        |
+             +-----------+------------+
+                         |
+                         v
+                 +----------------+
+                 |  Scan Output   |
+                 |  (JSON / Logs) |
+                 +----------------+
 
+
+Explanation
+
+Client / UI (Optional):
+Can be a frontend or API consumer that triggers scans and views results.
+
+main.py:
+Entry point that orchestrates the scanning pipeline.
+
+Config Loader:
+Loads settings from config.yaml such as DB connections, engine configurations, and rules.
+
+Scanner Engine:
+Handles the actual code scanning. Currently supports Java, but the architecture allows adding more engines.
+
+Database Layer:
+Stores scan results, metadata, and logs.
+
+Custom Rules:
+User-defined security rules for scanning.
+
+Code Parsing & Analysis:
+Scanner engine parses code, applies rules, and generates findings.
+
+Scan Output:
+Consolidates results, logs, and optionally returns them to the client.
 
 
